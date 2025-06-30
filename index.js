@@ -65,3 +65,7 @@ app.post('/calcular', (req, res) => {
     <br><a href="/">Voltar</a>
   `);
 });
+
+app.listen(3000, () => {
+  console.log('Servidor rodando em http://localhost:3000');
+});
