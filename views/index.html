@@ -2,37 +2,40 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Experiência Tibia - Hiit</title>
+  <title>Calculadora de Experiência Tibia</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Calculadora de Experiência Tibia - Hiit</h1>
+    <h1>Calculadora de Experiência Criada por Hiit</h1>
     <form action="/calcular" method="POST" id="formulario">
+      <label>Experiência atual do personagem:</label>
+      <input type="number" name="exp_atual" required>
+
       <div id="blocos">
         <div class="bloco">
-          
           <h3>Calculo 1</h3>
-          <label>Experiência atual do personagem:</label>
-          <input type="number" name="exp_atual" required>
-
           <label>Horas:</label>
           <input type="number" name="horas[]" required>
 
           <label>Exp crua por hora:</label>
           <input type="number" name="exp_crua[]" required>
 
-          <label>Double XP (%):</label>
-          <input type="number" name="base[]" value="0" required>
-
           <label>Evento (%):</label>
           <input type="number" name="evento[]" value="0">
 
-          <label>Boost (%):</label>
-          <input type="number" name="boost[]" value="0">
-
           <label>Stamina (%):</label>
           <input type="number" name="stamina[]" value="150" required>
+
+          <div class="checkbox-inline">
+          <input type="checkbox" name="double_event[]">
+          <label>Double XP Event (100%)</label>
+          </div>
+
+    <div class="checkbox-inline">
+      <input type="checkbox" name="boost[]">
+      <label>XP Boost Ativo (50%)</label>
+      </div>
 
           <hr>
         </div>
@@ -58,17 +61,14 @@
         <label>Exp crua por hora:</label>
         <input type="number" name="exp_crua[]" required>
 
-        <label>Double XP(%):</label>
-        <input type="number" name="base[]" value="100" required>
-
         <label>Evento (%):</label>
         <input type="number" name="evento[]" value="0">
 
-        <label>Boost (%):</label>
-        <input type="number" name="boost[]" value="0">
-
         <label>Stamina (%):</label>
         <input type="number" name="stamina[]" value="150" required>
+
+        <label><input type="checkbox" name="double_event[]"> Double XP Event (100%)</label><br>
+        <label><input type="checkbox" name="boost[]"> XP Boost Ativo (50%)</label><br>
         <hr>
       `;
       blocos.appendChild(div);
