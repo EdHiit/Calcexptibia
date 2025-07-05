@@ -1,3 +1,4 @@
+<!-- Interface simples de entrada -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Calculadora de Experiência Criada por Hiit</h1>
+    <h1>Calculadora de Experiência criada por Hiit</h1>
     <form action="/calcular" method="POST" id="formulario">
       <label>Experiência atual do personagem:</label>
       <input type="number" name="exp_atual" required>
@@ -15,27 +16,24 @@
       <div id="blocos">
         <div class="bloco">
           <h3>Calculo 1</h3>
+
           <label>Horas:</label>
-          <input type="number" name="horas[]" required>
+          <input type="number" name="horas[0]" required>
 
           <label>Exp crua por hora:</label>
-          <input type="number" name="exp_crua[]" required>
+          <input type="number" name="exp_crua[0]" required>
 
           <label>Evento (%):</label>
-          <input type="number" name="evento[]" value="0">
+          <input type="number" name="evento[0]" value="0">
 
           <label>Stamina (%):</label>
-          <input type="number" name="stamina[]" value="150" required>
+          <input type="number" name="stamina[0]" value="150" required>
 
-          <div class="checkbox-inline">
-          <input type="checkbox" name="double_event[]">
-          <label>Double XP Event (100%)</label>
-          </div>
+          <label>Double XP (%):</label>
+          <input type="number" name="double_event[0]" value="0">
 
-    <div class="checkbox-inline">
-      <input type="checkbox" name="boost[]">
-      <label>XP Boost Ativo (50%)</label>
-      </div>
+          <label>XP Boost (%):</label>
+          <input type="number" name="boost[0]" value="0">
 
           <hr>
         </div>
@@ -49,29 +47,35 @@
   <script>
     let contador = 1;
     function adicionarBloco() {
-      contador++;
       const blocos = document.getElementById('blocos');
       const div = document.createElement('div');
       div.classList.add('bloco');
+
       div.innerHTML = `
-        <h3>Calculo ${contador}</h3>
+        <h3>Calculo ${contador + 1}</h3>
+
         <label>Horas:</label>
-        <input type="number" name="horas[]" required>
+        <input type="number" name="horas[${contador}]" required>
 
         <label>Exp crua por hora:</label>
-        <input type="number" name="exp_crua[]" required>
+        <input type="number" name="exp_crua[${contador}]" required>
 
         <label>Evento (%):</label>
-        <input type="number" name="evento[]" value="0">
+        <input type="number" name="evento[${contador}]" value="0">
 
         <label>Stamina (%):</label>
-        <input type="number" name="stamina[]" value="150" required>
+        <input type="number" name="stamina[${contador}]" value="150" required>
 
-        <label><input type="checkbox" name="double_event[]"> Double XP Event (100%)</label><br>
-        <label><input type="checkbox" name="boost[]"> XP Boost Ativo (50%)</label><br>
+        <label>Double XP (%):</label>
+        <input type="number" name="double_event[${contador}]" value="0">
+
+        <label>XP Boost (%):</label>
+        <input type="number" name="boost[${contador}]" value="0">
+
         <hr>
       `;
       blocos.appendChild(div);
+      contador++;
     }
   </script>
 </body>
