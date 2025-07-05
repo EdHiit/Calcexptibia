@@ -5,10 +5,13 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fórmula da experiência total
+// Cálculo de experiência total acumulada para determinado level
+// Fórmula baseada na documentação oficial do Tibia: https://www.tibia.com/library/?subtopic=experiencetable
 function expTotal(level) {
   return (50 / 3) * level ** 3 - 100 * level ** 2 + (850 / 3) * level - 200;
 }
+
+// Determina o level com base na experiência total acumulada
 function expParaLevel(exp) {
   let lvl = 1;
   while (expTotal(lvl + 1) <= exp) lvl++;
@@ -20,23 +23,28 @@ app.get('/', (req, res) => {
 });
 
 app.post('/calcular', (req, res) => {
-  const { exp_atual, horas, exp_crua, evento, stamina, double_event, boost } = req.body;
+  const {
+    exp_atual,
+    horas,
+    exp_crua,
+    evento,
+    stamina,
+    double_event = [],
+    boost = []
+  } = req.body;
 
-  const expAtual = parseFloat(exp_atual);
+  const keys = Object.keys(horas);
   let totalGanho = 0;
   let detalhes = '';
+  const expAtual = parseFloat(exp_atual);
 
-  for (let i = 0; i < horas.length; i++) {
+  for (const i of keys) {
     const h = parseFloat(horas[i]);
     const crua = parseFloat(exp_crua[i]);
     const e = parseFloat(evento[i]) / 100;
     const s = parseFloat(stamina[i]) / 100;
-
-    const isDouble = double_event && double_event[i] === 'on';
-    const isBoost = boost && boost[i] === 'on';
-
-    const b = isDouble ? 1.0 : 0;  // 100%
-    const bs = isBoost ? 0.5 : 0;  // 50%
+    const b = parseFloat(double_event[i]) / 100 || 0;
+    const bs = parseFloat(boost[i]) / 100 || 0;
 
     const bonus = (1 + b + e + bs) * s;
     const expHora = crua * bonus;
@@ -46,7 +54,7 @@ app.post('/calcular', (req, res) => {
 
     detalhes += `
       <li>
-        <strong>Bloco ${i + 1}:</strong><br>
+        <strong>Bloco ${parseInt(i) + 1}:</strong><br>
         Horas: ${h}<br>
         Exp/hora com bônus: ${expHora.toLocaleString()}<br>
         Exp total do bloco: ${ganhoBloco.toLocaleString()}<br>
