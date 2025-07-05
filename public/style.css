@@ -4,6 +4,7 @@ body {
   color: #f0f0f0;
   padding: 20px;
 }
+
 .container {
   max-width: 600px;
   margin: auto;
@@ -11,7 +12,9 @@ body {
   padding: 20px;
   border-radius: 10px;
 }
-input, button {
+
+input,
+button {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 15px;
@@ -19,6 +22,7 @@ input, button {
   font-size: 16px;
   border-radius: 5px;
   border: none;
+  box-sizing: border-box;
 }
 
 button {
@@ -27,21 +31,18 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
 button:hover {
   background: #00b359;
 }
-h1, h3 {
-  color: #00b359;
+
+h1,
+h3 {
+  color: #00cc66;
 }
 
-.checkbox-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0px;
-  margin-bottom: 10px;
-  white-space: nowrap;
-}
-
-.checkbox-inline label {
-  margin: 0;
+.bloco {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #00cc66;
 }
